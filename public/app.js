@@ -68,7 +68,7 @@ function renderCart() {
     const p = prod(id);
     return `<div class="li"><img src="${catOf(p.cat).img}" alt="" width="64" height="48"><div><div class="t">${esc(p.name)}</div><div class="s">${fmt(unit(p, q))} each · ${p.id}</div>
       <div class="row" style="margin-top:6px"><div class="qty"><button data-dq="${id}" data-d="-1" aria-label="Decrease">−</button><input value="${q}" data-qi="${id}" inputmode="numeric" aria-label="Quantity"><button data-dq="${id}" data-d="1" aria-label="Increase">+</button></div><button class="link" data-rm="${id}">Remove</button></div></div>
-      <b style="font-size:var(--text-sm)">${fmt(unit(p, q) * q)}</b></div>`;
+      <b style="font-size:var(--site-text-sm)">${fmt(unit(p, q) * q)}</b></div>`;
   }).join('') : `<div class="empty"><p class="muted">Your cart is empty.</p><a href="#/shop" class="btn d" style="margin-top:12px" data-close>Browse equipment</a></div>`;
   $('#cartFoot').innerHTML = items.length ? `
     <div class="sum"><span>Subtotal (${mode === 'trade' ? 'trade pricing' : 'retail pricing'})</span><span>${fmt(t.sub)}</span></div>
@@ -169,7 +169,7 @@ function shop(cat) {
       <div><h4>Retail price</h4>${[['all', 'Any price'], ['a', 'Under $300'], ['b', '$300 – $1,000'], ['c', '$1,000 – $5,000'], ['d', '$5,000 – $10,000']].map(([v, l]) => `<label><input type="radio" name="fp" value="${v}" ${F.price === v ? 'checked' : ''}>${l}</label>`).join('')}</div>
     </aside>
     <div>
-      <div class="toolbar"><div><h1>${title}</h1><p class="muted" style="font-size:var(--text-sm)">${list.length} product${list.length === 1 ? '' : 's'} · showing ${mode === 'trade' ? 'installer trade' : 'homeowner retail'} prices</p></div>
+      <div class="toolbar"><div><h1>${title}</h1><p class="muted" style="font-size:var(--site-text-sm)">${list.length} product${list.length === 1 ? '' : 's'} · showing ${mode === 'trade' ? 'installer trade' : 'homeowner retail'} prices</p></div>
         <select class="field" id="fs" style="width:auto" aria-label="Sort"><option value="feat">Featured</option><option value="lo" ${F.sort === 'lo' ? 'selected' : ''}>Price: low to high</option><option value="hi" ${F.sort === 'hi' ? 'selected' : ''}>Price: high to low</option></select></div>
       <p class="catalog-note">Catalog examples are illustrative. Confirm current stock, specifications and final price with our team before ordering.</p>
       ${list.length ? `<div class="grid">${list.map(card).join('')}</div>` : `<div class="empty"><p><b>No products match those filters.</b></p><p class="muted">Try a different category or price range.</p><button class="btn o" id="fr" style="margin-top:12px">Clear filters</button></div>`}
@@ -196,13 +196,13 @@ function pdp(id) {
       <p class="sku">SKU ${p.id} · Sold per ${p.unit}</p>
       <ul class="specs">${p.specs.map(s => `<li>${esc(s)}</li>`).join('')}</ul>
       <div class="pbox">
-        <div class="pr" style="padding:0"><b style="font-size:var(--text-xl)" id="pu">${fmt(unit(p))}</b>${mode === 'trade' ? `<s>Retail ${fmt(p.price)}</s>` : ''}<small>/ ${p.unit} · USD</small></div>
+        <div class="pr" style="padding:0"><b style="font-size:var(--site-text-xl)" id="pu">${fmt(unit(p))}</b>${mode === 'trade' ? `<s>Retail ${fmt(p.price)}</s>` : ''}<small>/ ${p.unit} · USD</small></div>
         <table class="tiers"><thead><tr><th>Quantity</th><th>${mode === 'trade' ? 'Trade' : 'Retail'} unit price</th></tr></thead><tbody>${tiers(p).map(t => `<tr><td>${t.l}</td><td>${fmt(Math.round(t.u * 100) / 100)}</td></tr>`).join('')}</tbody></table>
         <div class="row"><div class="qty"><button data-pq="-1" aria-label="Decrease">−</button><input id="pq" value="1" inputmode="numeric" aria-label="Quantity"><button data-pq="1" aria-label="Increase">+</button></div>
           <button class="btn p" id="padd" style="flex:1">Add to cart — <span id="pt">${fmt(unit(p))}</span></button></div>
         ${mode === 'retail' ? `<p class="note">Installer? <button class="link" data-mode="trade">Switch to trade pricing</button> to see ${fmt(unit(p) * (1 - S.tradeDiscount))} and volume breaks. Trade orders are verified before shipping.</p>` : `<p class="note">Trade pricing applies to approved installer accounts. We confirm retail pricing before payment if no approved account exists.</p>`}
       </div>
-      <div style="margin-top:var(--s6);display:grid;gap:var(--s2);font-size:var(--text-sm)">
+      <div style="margin-top:var(--s6);display:grid;gap:var(--s2);font-size:var(--site-text-sm)">
         <div><b>Ships:</b> ${p.unit === 'pallet' || p.price >= 2500 ? 'LTL freight, 5–10 business days after dispatch' : 'Ground parcel, 3–7 business days after dispatch'}. Dispatch in 1–3 business days. Contiguous US only.</div>
         ${isBatt ? `<div><b>Lithium battery item:</b> ships by ground as a regulated Class 9 shipment; no air or PO boxes. See <a href="#/shipping">shipping policy</a>.</div>` : ''}
         <div><b>Returns:</b> 30 days for unused items in original packaging. <a href="#/returns">Return policy</a>.</div>
@@ -218,8 +218,8 @@ function bindPdp() { $('#pq')?.addEventListener('input', updPd); $('#padd')?.add
 const US = 'AL AR AZ CA CO CT DE DC FL GA ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY'.split(' ');
 function checkout() {
   const t = totals();
-  if (!t.n) return `<div class="wrap"><div class="ok"><h1 style="font-size:var(--text-xl)">Your cart is empty</h1><p class="muted">Add equipment to your cart to check out.</p><div><a href="#/shop" class="btn d">Shop equipment</a></div></div></div>`;
-  const lines = Object.entries(cart).filter(([id]) => prod(id)).map(([id, q]) => { const p = prod(id); return `<div class="li" style="grid-template-columns:56px 1fr auto"><img src="${catOf(p.cat).img}" alt="" style="width:56px;height:42px"><div><div class="t">${esc(p.name)}</div><div class="s">Qty ${q} × ${fmt(unit(p, q))}</div></div><b style="font-size:var(--text-sm)">${fmt(unit(p, q) * q)}</b></div>`; }).join('');
+  if (!t.n) return `<div class="wrap"><div class="ok"><h1 style="font-size:var(--site-text-xl)">Your cart is empty</h1><p class="muted">Add equipment to your cart to check out.</p><div><a href="#/shop" class="btn d">Shop equipment</a></div></div></div>`;
+  const lines = Object.entries(cart).filter(([id]) => prod(id)).map(([id, q]) => { const p = prod(id); return `<div class="li" style="grid-template-columns:56px 1fr auto"><img src="${catOf(p.cat).img}" alt="" style="width:56px;height:42px"><div><div class="t">${esc(p.name)}</div><div class="s">Qty ${q} × ${fmt(unit(p, q))}</div></div><b style="font-size:var(--site-text-sm)">${fmt(unit(p, q) * q)}</b></div>`; }).join('');
   return `<div class="wrap co">
   <form id="cof" novalidate>
     <h1>Checkout</h1>
@@ -236,17 +236,17 @@ function checkout() {
     </fieldset>
     <fieldset><legend>Order request</legend>
       <div class="paybox"><b>No online payment is collected here.</b>
-      <p class="muted" style="font-size:var(--text-sm)">Prepare an order request in your email app. We will confirm stock, shipping, applicable tax and payment before your order is placed.</p></div>
+      <p class="muted" style="font-size:var(--site-text-sm)">Prepare an order request in your email app. We will confirm stock, shipping, applicable tax and payment before your order is placed.</p></div>
     </fieldset>
     <fieldset>
       <label class="chk"><input type="checkbox" name="agree" required><span>I have read and agree to the <a href="#/terms" target="_blank">Terms of Sale</a>, <a href="#/returns" target="_blank">Return &amp; Refund Policy</a>, <a href="#/shipping" target="_blank">Shipping Policy</a> and <a href="#/privacy" target="_blank">Privacy Policy</a>.</span></label>
       ${mode === 'trade' ? `<label class="chk"><input type="checkbox" name="trade" required><span>I am purchasing on behalf of a licensed solar contractor. I understand trade pricing is verified before shipment and the order is billed at retail if no approved account exists.</span></label>` : ''}
       <p class="err" id="coErr" role="alert"></p>
       <button class="btn p" style="width:100%;padding:16px">Prepare order request — ${fmt(t.total)} USD</button>
-      <p class="muted" style="font-size:var(--text-xs);text-align:center">Applicable sales tax is confirmed based on your shipping address. Trade buyers with a resale certificate may be tax-exempt.</p>
+      <p class="muted" style="font-size:var(--site-text-xs);text-align:center">Applicable sales tax is confirmed based on your shipping address. Trade buyers with a resale certificate may be tax-exempt.</p>
     </fieldset>
   </form>
-  <aside class="aside"><h3 style="font-size:var(--text-lg)">Order summary</h3>${lines}
+  <aside class="aside"><h3 style="font-size:var(--site-text-lg)">Order summary</h3>${lines}
     <hr style="border:0;border-top:1px solid var(--line)">
     <div class="sum"><span>Subtotal</span><span>${fmt(t.sub)}</span></div>
     <div class="sum"><span>Shipping</span><span>${t.ship ? fmt(t.ship) : 'Free'}</span></div>
@@ -369,7 +369,7 @@ const pages = {
     <h2>8. Disputes</h2><p>Please contact us first so we can resolve any issue. These terms are governed by the laws of the State of ${esc(S.governingState)}, and disputes are subject to the courts of ${esc(S.governingCounty)}, ${esc(S.governingState)}.</p>
     <h2>9. Contact</h2>${idBox()}</div>`,
   privacy: () => `<div class="wrap doc"><span class="eyebrow">Legal</span><h1>Privacy Policy</h1><p class="muted">${updated}</p>
-    <h2>Information we collect</h2><ul><li><b>Order information:</b> name, email, phone, shipping and billing address, company and order details.</li><li><b>Payment information:</b> not collected on this website. Payment arrangements are confirmed separately before an order is accepted.</li><li><b>Installer applications:</b> company, license and contact details.</li><li><b>Site usage:</b> basic device and browsing data through cookies, and your cart contents stored in your browser.</li></ul>
+    <h2>Information we collect</h2><ul><li><b>Order information:</b> name, email, phone, shipping and billing address, company and order details.</li><li><b>Payment information:</b> not collected on this website. Payment arrangements are confirmed separately before an order is accepted.</li><li><b>Installer applications:</b> company, license and contact details.</li><li><b>Site usage:</b> cart contents and pricing preference saved in your browser's local storage.</li></ul>
     <h2>How we use it</h2><p>To respond to order requests, process confirmed orders, verify trade accounts, prevent fraud, answer questions, meet tax and legal obligations, and, if you opt in, send product updates.</p>
     <h2>Sharing</h2><p>We share information only with service providers who help us run the store (shipping carriers, email and hosting providers) and when required by law. We do not sell your personal information.</p>
     <h2>Your choices</h2><p>You may request access to, correction of, or deletion of personal information you have sent us by emailing ${esc(S.email)}. You may unsubscribe from marketing email at any time.</p>
@@ -387,7 +387,7 @@ function bindContact() {
     prepareRequest('Solar Edge LLC customer message', body, $('#cErr'));
   });
 }
-function notFound() { return `<div class="wrap"><div class="ok"><h1 style="font-size:var(--text-xl)">Page not found</h1><div><a href="#/" class="btn d">Go home</a></div></div></div>`; }
+function notFound() { return `<div class="wrap"><div class="ok"><h1 style="font-size:var(--site-text-xl)">Page not found</h1><div><a href="#/" class="btn d">Go home</a></div></div></div>`; }
 
 // ---------- router ----------
 function route() {
@@ -415,9 +415,9 @@ $('#ft-cats').innerHTML = C.map(c => `<a href="#/shop/${c.id}">${c.name}</a>`).j
 $('#ft-copy').textContent = `© 2026 ${S.legalName}`;
 if (!store.get('ts_cookie', false)) {
   const b = document.createElement('div'); b.className = 'cookie';
-  b.innerHTML = `<span>We use essential cookies to keep your cart and preferences during your visit. See our <a href="#/privacy">Privacy Policy</a>.</span><button class="btn d" style="padding:8px 14px">OK</button>`;
+  b.innerHTML = `<span>We save your cart and pricing preference in this browser. See our <a href="#/privacy">Privacy Policy</a>.</span><button class="btn d" style="padding:8px 14px">OK</button>`;
   b.querySelector('button').onclick = () => { store.set('ts_cookie', true); b.remove(); };
-  document.body.appendChild(b);
+  document.querySelector('header.site').insertAdjacentElement('afterend', b);
 }
 document.querySelectorAll('.mode button').forEach(b => b.classList.toggle('on', b.dataset.mode === mode));
 renderCart(); route();

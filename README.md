@@ -17,5 +17,5 @@ The site uses hash routes: `#/`, `#/shop`, `#/shop/:category`, `#/p/:sku`, `#/tr
 
 ## Store data and requests
 
-Products and business details live in `public/data.js`. The cart and pricing mode are saved in the visitor's browser. Contact, trade, and order forms prepare an email to `support@solaredgellc.com`; no online payment or server-side form processing is connected. Product listings are illustrative and should be verified against inventory and supplier specifications before live sales.
+Products and business details live in `public/data.js`. The cart and pricing mode are saved in the visitor's browser. Contact, trade, and order forms prepare an email to `support@solaredge-llc.com`; no online payment or server-side form processing is connected. Product listings are illustrative and should be verified against inventory and supplier specifications before live sales.
 
