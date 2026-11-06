@@ -1,0 +1,60 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Solar Edge LLC — Solar Equipment for Installers & Homeowners</title>
+<meta name="description" content="Solar Edge LLC offers solar panels, inverters, batteries, racking, and complete kits for installers and homeowners across the contiguous United States.">
+<link rel="stylesheet" href="/src/index.css">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+</head>
+<body>
+<div class="topbar"><div class="wrap"><span>Free contiguous-US shipping on orders over $1,500 · Trade pricing for licensed installers</span><span class="r" id="tb-contact"></span></div></div>
+<header class="site"><div class="wrap">
+  <a href="#/" class="brand" aria-label="Solar Edge LLC home"><span class="brand-dot" aria-hidden="true"></span>Solar Edge LLC</a>
+  <nav class="main" id="nav">
+    <a href="#/shop" data-r="shop">Shop</a>
+    <a href="#/trade" data-r="trade">For Installers</a>
+    <a href="#/about" data-r="about">About</a>
+    <a href="#/faq" data-r="faq">FAQ</a>
+    <a href="#/contact" data-r="contact">Contact</a>
+  </nav>
+  <div class="mode" role="group" aria-label="Pricing mode">
+    <button data-mode="retail" class="on">Homeowner</button>
+    <button data-mode="trade">Installer</button>
+  </div>
+  <button class="menu-t" id="menuT" aria-expanded="false" aria-controls="nav">Menu</button>
+  <button class="cartbtn" id="cartBtn" aria-label="Open cart"><span class="lbl">Cart</span><span class="n" id="cartN">0</span></button>
+</div></header>
+
+<main id="app" tabindex="-1"></main>
+
+<footer class="site"><div class="wrap">
+  <div class="cols">
+    <div>
+      <div class="brand"><span class="brand-dot" aria-hidden="true"></span>Solar Edge LLC</div>
+      <p id="ft-id" style="max-width:34ch"></p>
+    </div>
+    <div><h5>Shop</h5><div id="ft-cats"></div></div>
+    <div><h5>Customer care</h5>
+      <a href="#/contact">Contact us</a><a href="#/shipping">Shipping policy</a><a href="#/returns">Returns &amp; refunds</a><a href="#/warranty">Warranty</a><a href="#/faq">FAQ</a></div>
+    <div><h5>Company</h5>
+      <a href="#/about">About</a><a href="#/trade">Installer accounts</a><a href="#/terms">Terms of sale</a><a href="#/privacy">Privacy policy</a></div>
+  </div>
+  <p class="dba-statement">Solar Edge LLC · Solar equipment for installers and homeowners.</p>
+  <div class="legal"><span id="ft-copy"></span><span>All prices in US dollars (USD). Sales limited to the contiguous United States.</span></div>
+</div></footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Shopping cart" aria-hidden="true">
+  <header><h3 style="font-size:var(--text-lg)">Your cart</h3><button class="x" id="cartX" aria-label="Close cart">×</button></header>
+  <div class="items" id="cartItems"></div>
+  <footer id="cartFoot"></footer>
+</aside>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="/data.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>
+
+
