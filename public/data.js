@@ -5,7 +5,7 @@ window.STORE = {
   city: "Montgomery, TX",
   address: "16747 Timberglen, Montgomery, TX 77316",
   phone: "+1 (832) 960-0340",
-  email: "support@solaredgellc.com",
+  email: "support@solaredge-llc.com",
   hours: ""
   , governingState: "Texas", governingCounty: "Montgomery County",
   tradeDiscount: 0.15, // installer / trade price off retail
