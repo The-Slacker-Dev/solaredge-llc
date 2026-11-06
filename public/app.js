@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
 const S = window.STORE, C = window.CATEGORIES, P = window.PRODUCTS;
 const $ = (s, el = document) => el.querySelector(s);
 const app = $('#app');

@@ -1,4 +1,4 @@
-﻿// ===== Store configuration — replace bracketed values with the real operator's details =====
+// ===== Store configuration — replace bracketed values with the real operator's details =====
 window.STORE = {
   brand: "Solar Edge LLC",
   legalName: "Solar Edge LLC",

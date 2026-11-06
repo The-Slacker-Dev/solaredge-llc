@@ -1,4 +1,4 @@
-﻿# Solar Edge LLC storefront
+# Solar Edge LLC storefront
 
 Responsive Vite storefront for Solar Edge LLC, rebuilt from the pages at solarvistaenergyllc.com. Tailwind CSS v4 powers the visual layer in `src/index.css`.
 
